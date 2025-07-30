@@ -28,11 +28,12 @@ import { AIInsightsDashboard } from "@/components/ai-insights-dashboard";
 // Dados simulados
 const document = {
   id: "1",
-  title: "Política de Privacidade v2.0",
+  title:  "Lei n.º 22-15_3108_Aprova o Código dos Valores Mobiliários_DR_170621.cleaned",
   uploadDate: "2024-01-15",
   size: "2.3 MB",
   totalContributions: 23,
   status: "active",
+  doc: "Lei n.º 22-15_3108_Aprova o Código dos Valores Mobiliários_DR_170621.cleaned.pdf",
 };
 
 const contributions = [
@@ -353,13 +354,20 @@ export function DocumentPage({ id }: DocumentPageProps) {
           {/* PDF Viewer Placeholder */}
           <Card>
             <CardContent className="p-6">
-              <div className="aspect-[3/4] bg-gray-100 rounded-lg flex items-center justify-center">
+              <div className="bg-gray-100 rounded-lg flex items-center justify-center">
                 <div className="text-center">
-                  <FileText className="mx-auto h-16 w-16 text-gray-400 mb-4" />
-                  <p className="text-gray-500">Visualizador de PDF</p>
-                  <p className="text-sm text-gray-400 mt-2">{document.title}</p>
+                 {/*   <FileText className="mx-auto h-16 w-16 text-gray-400 mb-4" />
+                  <p className="text-gray-500">Visualizador de PDF</p> 
+                  <p className="text-sm text-gray-400 mt-2">{document.title}</p> */}
+
                 </div>
               </div>
+              <iframe
+                src={`/${document.doc}`}
+                width="100%"
+                height="600px"
+              /*   className="w-full h-full border rounded" */
+              />
             </CardContent>
           </Card>
 
