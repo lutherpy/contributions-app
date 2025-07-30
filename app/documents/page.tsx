@@ -14,12 +14,12 @@ import Link from "next/link";
 const documents = [
   {
     id: "1",
-    title: "Política de Privacidade v2.0",
-    description:
-      "Documento atualizado com as novas diretrizes de proteção de dados",
+    title: "Lei n.º 22-15_3108_Aprova o Código dos Valores Mobiliários_DR_170621.cleaned",
     uploadDate: "2024-01-15",
-    contributions: 23,
+    size: "2.3 MB",
+    totalContributions: 23,
     status: "active",
+    doc: "Lei n.º 22-15_3108_Aprova o Código dos Valores Mobiliários_DR_170621.cleaned.pdf",
     category: "Legal",
   },
   {
@@ -119,15 +119,15 @@ export default function DocumentsPage() {
                     doc.status === "active"
                       ? "default"
                       : doc.status === "review"
-                      ? "secondary"
-                      : "outline"
+                        ? "secondary"
+                        : "outline"
                   }
                 >
                   {doc.status === "active"
                     ? "Ativo"
                     : doc.status === "review"
-                    ? "Revisão"
-                    : "Rascunho"}
+                      ? "Revisão"
+                      : "Rascunho"}
                 </Badge>
               </div>
             </CardHeader>
