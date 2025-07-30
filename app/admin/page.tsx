@@ -75,7 +75,7 @@ export default function AdminPage() {
           <CardHeader>
             <CardTitle>Upload de Documento</CardTitle>
             <CardDescription>
-              Envie um arquivo PDF para receber contribuições dos utilizadors
+              Envie um arquivo PDF para receber contribuições dos usuários
             </CardDescription>
           </CardHeader>
           <CardContent>

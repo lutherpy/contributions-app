@@ -365,7 +365,7 @@ export function DocumentPage({ id }: DocumentPageProps) {
               <iframe
                 src={`/${document.doc}`}
                 width="100%"
-                height="600px"
+                height="500px"
               /*   className="w-full h-full border rounded" */
               />
             </CardContent>

@@ -5,6 +5,8 @@ import {
   Users,
   BarChart3,
   Settings,
+  Gavel,
+  User,
 } from "lucide-react";
 import {
   Sidebar,
@@ -22,7 +24,7 @@ import Link from "next/link";
 
 const menuItems = [
   {
-    title: "Dashboard",
+    title: "Dashboard Geral",
     url: "/",
     icon: Home,
   },
@@ -37,7 +39,7 @@ const menuItems = [
     icon: Upload,
   },
   {
-    title: "Utilizadors",
+    title: "Utilizadores",
     url: "/users",
     icon: Users,
   },
@@ -45,6 +47,20 @@ const menuItems = [
     title: "Relatórios",
     url: "/reports",
     icon: BarChart3,
+  },
+];
+
+// Novos itens de menu para as visões de perfil
+const profileViews = [
+  {
+    title: "Visão do Regulador",
+    url: "/regulator",
+    icon: Gavel,
+  },
+  {
+    title: "Visão do Participante",
+    url: "/participant",
+    icon: User,
   },
 ];
 
@@ -70,6 +86,24 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Visões de Perfil</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {profileViews.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link href={item.url}>
