@@ -60,7 +60,7 @@ const contributions = [
       avatar: "/placeholder.svg?height=32&width=32",
     },
     content:
-      "Sugiro adicionar um exemplo prático de como o usuário pode exercer seus direitos de acordo com a LGPD.",
+      "Sugiro adicionar um exemplo prático de como o utilizador pode exercer seus direitos de acordo com a LGPD.",
     timestamp: "4 horas atrás",
     likes: 3,
     dislikes: 1,
@@ -94,7 +94,7 @@ const aiAnalysis = {
       type: "improvement",
       title: "Adicionar Exemplos de Direitos (Seção 5.1)",
       description:
-        "Usuários querem exemplos práticos de como exercer seus direitos.",
+        "Utilizadores querem exemplos práticos de como exercer seus direitos.",
       confidence: 85,
     },
     {

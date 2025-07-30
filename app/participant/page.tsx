@@ -1,6 +1,12 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   User,
   MessageSquare,
@@ -12,8 +18,8 @@ import {
   CheckCircle,
   ArrowRight,
   PlusCircle,
-} from "lucide-react"
-import Link from "next/link"
+} from "lucide-react";
+import Link from "next/link";
 
 // Dados simulados para a visão do Participante
 const participantStats = {
@@ -21,7 +27,7 @@ const participantStats = {
   activeDocuments: 4,
   totalLikesReceived: 28,
   pendingReviews: 2,
-}
+};
 
 const myRecentContributions = [
   {
@@ -34,7 +40,7 @@ const myRecentContributions = [
   },
   {
     id: "C2",
-    document: "Manual do Usuário v3.1",
+    document: "Manual do Utilizador v3.1",
     title: "Sugestão de exemplo prático",
     status: "Resolvido",
     lastActivity: "3 dias atrás",
@@ -48,7 +54,7 @@ const myRecentContributions = [
     lastActivity: "1 dia atrás",
     likes: 2,
   },
-]
+];
 
 const documentsFollowing = [
   {
@@ -67,20 +73,22 @@ const documentsFollowing = [
     status: "Em Revisão",
     lastUpdate: "1 dia atrás",
   },
-]
+];
 
 const recentNotifications = [
   {
     id: "N1",
     type: "reply",
-    message: "Sua contribuição 'Clarificar coleta de dados' recebeu uma resposta.",
+    message:
+      "Sua contribuição 'Clarificar coleta de dados' recebeu uma resposta.",
     link: "/documents/1/contributions/C1/insights",
     time: "30 minutos atrás",
   },
   {
     id: "N2",
     type: "like",
-    message: "Sua contribuição 'Sugestão de exemplo prático' foi curtida por Maria S.",
+    message:
+      "Sua contribuição 'Sugestão de exemplo prático' foi curtida por Maria S.",
     link: "/documents/3/contributions/C2/insights",
     time: "2 horas atrás",
   },
@@ -91,7 +99,7 @@ const recentNotifications = [
     link: "/documents/1",
     time: "1 dia atrás",
   },
-]
+];
 
 export default function ParticipantDashboard() {
   return (
@@ -108,51 +116,73 @@ export default function ParticipantDashboard() {
           </Link>
         </Button>
       </div>
-      <p className="text-muted-foreground">Suas contribuições e documentos monitorados</p>
+      <p className="text-muted-foreground">
+        Suas contribuições e documentos monitorados
+      </p>
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Minhas Contribuições</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Minhas Contribuições
+            </CardTitle>
             <MessageSquare className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{participantStats.totalContributions}</div>
+            <div className="text-2xl font-bold">
+              {participantStats.totalContributions}
+            </div>
             <p className="text-xs text-muted-foreground">Total enviadas</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Documentos Ativos</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Documentos Ativos
+            </CardTitle>
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{participantStats.activeDocuments}</div>
+            <div className="text-2xl font-bold">
+              {participantStats.activeDocuments}
+            </div>
             <p className="text-xs text-muted-foreground">Que estou seguindo</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Curtidas Recebidas</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Curtidas Recebidas
+            </CardTitle>
             <ThumbsUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{participantStats.totalLikesReceived}</div>
-            <p className="text-xs text-muted-foreground">Em minhas contribuições</p>
+            <div className="text-2xl font-bold">
+              {participantStats.totalLikesReceived}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Em minhas contribuições
+            </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Revisões Pendentes</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Revisões Pendentes
+            </CardTitle>
             <Clock className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-orange-600">{participantStats.pendingReviews}</div>
-            <p className="text-xs text-muted-foreground">Minhas contribuições</p>
+            <div className="text-2xl font-bold text-orange-600">
+              {participantStats.pendingReviews}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Minhas contribuições
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -162,11 +192,16 @@ export default function ParticipantDashboard() {
         <Card>
           <CardHeader>
             <CardTitle>Minhas Contribuições Recentes</CardTitle>
-            <CardDescription>Status e atividade das suas últimas contribuições</CardDescription>
+            <CardDescription>
+              Status e atividade das suas últimas contribuições
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {myRecentContributions.map((contrib) => (
-              <div key={contrib.id} className="flex items-center justify-between p-3 border rounded-lg">
+              <div
+                key={contrib.id}
+                className="flex items-center justify-between p-3 border rounded-lg"
+              >
                 <div className="space-y-1">
                   <p className="font-medium">{contrib.title}</p>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -178,9 +213,19 @@ export default function ParticipantDashboard() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge variant={contrib.status === "Resolvido" ? "default" : "secondary"}>{contrib.status}</Badge>
+                  <Badge
+                    variant={
+                      contrib.status === "Resolvido" ? "default" : "secondary"
+                    }
+                  >
+                    {contrib.status}
+                  </Badge>
                   <Button asChild size="sm" variant="outline">
-                    <Link href={`/documents/1/contributions/${contrib.id}/insights`}>Ver</Link>
+                    <Link
+                      href={`/documents/1/contributions/${contrib.id}/insights`}
+                    >
+                      Ver
+                    </Link>
                   </Button>
                 </div>
               </div>
@@ -195,22 +240,30 @@ export default function ParticipantDashboard() {
               <Star className="h-5 w-5" />
               Documentos que Sigo
             </CardTitle>
-            <CardDescription>Documentos com atualizações e minhas contribuições</CardDescription>
+            <CardDescription>
+              Documentos com atualizações e minhas contribuições
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {documentsFollowing.map((doc, index) => (
-              <div key={index} className="flex items-start gap-3 p-3 border rounded-lg">
+              <div
+                key={index}
+                className="flex items-start gap-3 p-3 border rounded-lg"
+              >
                 <div className="mt-1">
                   <FileText className="h-4 w-4 text-blue-500" />
                 </div>
                 <div className="flex-1 space-y-1">
                   <p className="font-medium text-sm">{doc.title}</p>
                   <p className="text-xs text-muted-foreground">
-                    Suas contribuições: {doc.myContributions} • Total: {doc.totalContributions}
+                    Suas contribuições: {doc.myContributions} • Total:{" "}
+                    {doc.totalContributions}
                   </p>
                   <div className="flex items-center gap-2 text-xs">
                     <Badge variant="outline">{doc.status}</Badge>
-                    <span className="text-muted-foreground">Última atualização: {doc.lastUpdate}</span>
+                    <span className="text-muted-foreground">
+                      Última atualização: {doc.lastUpdate}
+                    </span>
                   </div>
                 </div>
                 <Button asChild size="sm" variant="ghost">
@@ -231,19 +284,32 @@ export default function ParticipantDashboard() {
             <Bell className="h-5 w-5" />
             Notificações Recentes
           </CardTitle>
-          <CardDescription>Atualizações sobre suas atividades e documentos</CardDescription>
+          <CardDescription>
+            Atualizações sobre suas atividades e documentos
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {recentNotifications.map((notification, index) => (
-            <div key={index} className="flex items-start gap-3 p-3 border rounded-lg">
+            <div
+              key={index}
+              className="flex items-start gap-3 p-3 border rounded-lg"
+            >
               <div className="mt-1">
-                {notification.type === "reply" && <MessageSquare className="h-4 w-4 text-blue-500" />}
-                {notification.type === "like" && <ThumbsUp className="h-4 w-4 text-green-500" />}
-                {notification.type === "status_update" && <CheckCircle className="h-4 w-4 text-purple-500" />}
+                {notification.type === "reply" && (
+                  <MessageSquare className="h-4 w-4 text-blue-500" />
+                )}
+                {notification.type === "like" && (
+                  <ThumbsUp className="h-4 w-4 text-green-500" />
+                )}
+                {notification.type === "status_update" && (
+                  <CheckCircle className="h-4 w-4 text-purple-500" />
+                )}
               </div>
               <div className="flex-1 space-y-1">
                 <p className="font-medium text-sm">{notification.message}</p>
-                <p className="text-xs text-muted-foreground">{notification.time}</p>
+                <p className="text-xs text-muted-foreground">
+                  {notification.time}
+                </p>
               </div>
               <Button asChild size="sm" variant="ghost">
                 <Link href={notification.link}>
@@ -255,5 +321,5 @@ export default function ParticipantDashboard() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

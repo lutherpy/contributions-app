@@ -1,12 +1,25 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Brain, Download, ArrowLeft, AlertTriangle, CheckCircle, MessageSquare } from "lucide-react"
-import Link from "next/link"
-import { useParams } from "next/navigation"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import {
+  Brain,
+  Download,
+  ArrowLeft,
+  AlertTriangle,
+  CheckCircle,
+  MessageSquare,
+} from "lucide-react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
 // Dados simulados para uma contribuição específica
 const mockContributions = [
@@ -23,7 +36,8 @@ const mockContributions = [
   {
     id: "2",
     title: "Adicionar Exemplos de Direitos",
-    content: "Sugiro adicionar um exemplo prático de como o usuário pode exercer seus direitos de acordo com a LGPD.",
+    content:
+      "Sugiro adicionar um exemplo prático de como o utilizador pode exercer seus direitos de acordo com a LGPD.",
     user: { name: "João Santos" },
     section: "Seção 5.1",
     timestamp: "2024-01-15T12:15:00Z",
@@ -39,18 +53,18 @@ const mockContributions = [
     timestamp: "2024-01-14T16:45:00Z",
     likes: 8,
   },
-]
+];
 
 // Função simulada para obter insights da IA para uma contribuição
 const getAIInsightsForContribution = (contributionId: string) => {
-  const contribution = mockContributions.find((c) => c.id === contributionId)
+  const contribution = mockContributions.find((c) => c.id === contributionId);
 
   if (!contribution) {
-    return null
+    return null;
   }
 
   // Insights simulados baseados no ID da contribuição
-  let insights
+  let insights;
   switch (contributionId) {
     case "1":
       insights = {
@@ -59,13 +73,15 @@ const getAIInsightsForContribution = (contributionId: string) => {
         keyFindings: [
           {
             title: "Foco na Especificidade",
-            description: "A contribuição destaca a necessidade de detalhes sobre os tipos de dados.",
+            description:
+              "A contribuição destaca a necessidade de detalhes sobre os tipos de dados.",
             confidence: 95,
             type: "critical",
           },
           {
             title: "Sentimento de Preocupação",
-            description: "O tom da contribuição indica uma preocupação com a conformidade e transparência.",
+            description:
+              "O tom da contribuição indica uma preocupação com a conformidade e transparência.",
             confidence: 88,
             type: "alert",
           },
@@ -76,33 +92,35 @@ const getAIInsightsForContribution = (contributionId: string) => {
           "Consultar especialista em privacidade para validação.",
         ],
         sentiment: { positive: 10, neutral: 30, negative: 60 },
-      }
-      break
+      };
+      break;
     case "2":
       insights = {
         summary:
-          "Esta contribuição é uma sugestão construtiva para melhorar a usabilidade e compreensão dos direitos do usuário.",
+          "Esta contribuição é uma sugestão construtiva para melhorar a usabilidade e compreensão dos direitos do utilizador.",
         keyFindings: [
           {
             title: "Necessidade de Exemplos Práticos",
-            description: "A IA detectou que usuários se beneficiam de exemplos concretos para aplicar seus direitos.",
+            description:
+              "A IA detectou que usuários se beneficiam de exemplos concretos para aplicar seus direitos.",
             confidence: 90,
             type: "improvement",
           },
           {
             title: "Sentimento Positivo/Neutro",
-            description: "A contribuição é construtiva e busca melhoria, sem tom negativo.",
+            description:
+              "A contribuição é construtiva e busca melhoria, sem tom negativo.",
             confidence: 80,
             type: "suggestion",
           },
         ],
         suggestedActions: [
-          "Criar um FAQ ou seção de 'Como Fazer' para os direitos do usuário.",
+          "Criar um FAQ ou seção de 'Como Fazer' para os direitos do utilizador.",
           "Desenvolver infográficos ou fluxogramas simples.",
         ],
         sentiment: { positive: 70, neutral: 20, negative: 10 },
-      }
-      break
+      };
+      break;
     case "3":
       insights = {
         summary:
@@ -110,13 +128,15 @@ const getAIInsightsForContribution = (contributionId: string) => {
         keyFindings: [
           {
             title: "Ambiguidade Crítica",
-            description: "A falta de prazos específicos pode gerar riscos legais e confusão.",
+            description:
+              "A falta de prazos específicos pode gerar riscos legais e confusão.",
             confidence: 98,
             type: "critical",
           },
           {
             title: "Sentimento de Urgência",
-            description: "O tom da contribuição sugere uma necessidade imediata de revisão.",
+            description:
+              "O tom da contribuição sugere uma necessidade imediata de revisão.",
             confidence: 92,
             type: "alert",
           },
@@ -126,41 +146,46 @@ const getAIInsightsForContribution = (contributionId: string) => {
           "Consultar o departamento jurídico para validação dos prazos.",
         ],
         sentiment: { positive: 5, neutral: 15, negative: 80 },
-      }
-      break
+      };
+      break;
     default:
       insights = {
-        summary: "Nenhum insight específico da IA disponível para esta contribuição.",
+        summary:
+          "Nenhum insight específico da IA disponível para esta contribuição.",
         keyFindings: [],
         suggestedActions: [],
         sentiment: { positive: 0, neutral: 0, negative: 0 },
-      }
+      };
   }
 
-  return { contribution, insights }
-}
+  return { contribution, insights };
+};
 
 export default function ContributionInsightsPage() {
-  const params = useParams()
-  const contributionId = params.contributionId as string
-  const documentId = params.id as string
+  const params = useParams();
+  const contributionId = params.contributionId as string;
+  const documentId = params.id as string;
 
-  const data = getAIInsightsForContribution(contributionId)
+  const data = getAIInsightsForContribution(contributionId);
 
   if (!data) {
     return (
       <div className="flex flex-col items-center justify-center h-[calc(100vh-100px)] text-muted-foreground">
         <Brain className="h-16 w-16 mb-4" />
-        <h2 className="text-xl font-semibold mb-2">Contribuição não encontrada</h2>
+        <h2 className="text-xl font-semibold mb-2">
+          Contribuição não encontrada
+        </h2>
         <p>Não foi possível carregar os insights para esta contribuição.</p>
         <Button asChild className="mt-4">
-          <Link href={`/documents/${documentId}/contributions`}>Voltar para Contribuições</Link>
+          <Link href={`/documents/${documentId}/contributions`}>
+            Voltar para Contribuições
+          </Link>
         </Button>
       </div>
-    )
+    );
   }
 
-  const { contribution, insights } = data
+  const { contribution, insights } = data;
 
   const handleExportInsights = () => {
     const insightsText = `
@@ -178,7 +203,9 @@ ${insights.summary}
 
 ---
 Principais Descobertas:
-${insights.keyFindings.map((f) => `- ${f.title} (${f.confidence}% confiança): ${f.description}`).join("\n")}
+${insights.keyFindings
+  .map((f) => `- ${f.title} (${f.confidence}% confiança): ${f.description}`)
+  .join("\n")}
 
 ---
 Ações Sugeridas:
@@ -189,33 +216,33 @@ Análise de Sentimento:
 Positivo: ${insights.sentiment.positive}%
 Neutro: ${insights.sentiment.neutral}%
 Negativo: ${insights.sentiment.negative}%
-    `.trim()
+    `.trim();
 
-    const blob = new Blob([insightsText], { type: "text/plain;charset=utf-8" })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement("a")
-    link.href = url
-    link.download = `insights_contribuicao_${contribution.id}.txt`
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-    URL.revokeObjectURL(url)
-  }
+    const blob = new Blob([insightsText], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `insights_contribuicao_${contribution.id}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   const getInsightIcon = (type: string) => {
     switch (type) {
       case "critical":
-        return <AlertTriangle className="h-4 w-4 text-red-500" />
+        return <AlertTriangle className="h-4 w-4 text-red-500" />;
       case "improvement":
-        return <CheckCircle className="h-4 w-4 text-blue-500" />
+        return <CheckCircle className="h-4 w-4 text-blue-500" />;
       case "alert":
-        return <AlertTriangle className="h-4 w-4 text-orange-500" />
+        return <AlertTriangle className="h-4 w-4 text-orange-500" />;
       case "suggestion":
-        return <MessageSquare className="h-4 w-4 text-green-500" />
+        return <MessageSquare className="h-4 w-4 text-green-500" />;
       default:
-        return <Brain className="h-4 w-4 text-gray-500" />
+        return <Brain className="h-4 w-4 text-gray-500" />;
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -229,7 +256,9 @@ Negativo: ${insights.sentiment.negative}%
             </Link>
           </Button>
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">Insights da IA para Contribuição</h2>
+            <h2 className="text-3xl font-bold tracking-tight">
+              Insights da IA para Contribuição
+            </h2>
             <p className="text-muted-foreground">
               "{contribution.title}" por {contribution.user.name}
             </p>
@@ -262,7 +291,9 @@ Negativo: ${insights.sentiment.negative}%
                       <div className="mt-1">{getInsightIcon(finding.type)}</div>
                       <div className="flex-1">
                         <p className="font-medium text-sm">{finding.title}</p>
-                        <p className="text-xs text-muted-foreground mt-1">{finding.description}</p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          {finding.description}
+                        </p>
                         <Badge variant="outline" className="text-xs mt-2">
                           {finding.confidence}% confiança
                         </Badge>
@@ -279,7 +310,10 @@ Negativo: ${insights.sentiment.negative}%
                 <h4 className="font-medium mb-3">Ações Sugeridas</h4>
                 <ul className="space-y-2">
                   {insights.suggestedActions.map((action, index) => (
-                    <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <li
+                      key={index}
+                      className="flex items-start gap-2 text-sm text-muted-foreground"
+                    >
                       <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
                       {action}
                     </li>
@@ -349,11 +383,15 @@ Negativo: ${insights.sentiment.negative}%
               <Separator />
               <div className="flex justify-between text-sm">
                 <span className="font-medium">Autor:</span>
-                <span className="text-muted-foreground">{contribution.user.name}</span>
+                <span className="text-muted-foreground">
+                  {contribution.user.name}
+                </span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="font-medium">Seção:</span>
-                <span className="text-muted-foreground">{contribution.section}</span>
+                <span className="text-muted-foreground">
+                  {contribution.section}
+                </span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="font-medium">Data:</span>
@@ -363,15 +401,23 @@ Negativo: ${insights.sentiment.negative}%
               </div>
               <div className="flex justify-between text-sm">
                 <span className="font-medium">Curtidas:</span>
-                <span className="text-muted-foreground">{contribution.likes}</span>
+                <span className="text-muted-foreground">
+                  {contribution.likes}
+                </span>
               </div>
-              <Button asChild variant="outline" className="w-full mt-4 bg-transparent">
-                <Link href={`/documents/${documentId}/contributions`}>Ver Todas Contribuições</Link>
+              <Button
+                asChild
+                variant="outline"
+                className="w-full mt-4 bg-transparent"
+              >
+                <Link href={`/documents/${documentId}/contributions`}>
+                  Ver Todas Contribuições
+                </Link>
               </Button>
             </CardContent>
           </Card>
         </div>
       </div>
     </div>
-  )
+  );
 }

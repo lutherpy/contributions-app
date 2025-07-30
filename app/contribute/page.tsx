@@ -1,15 +1,28 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { FileText, MessageSquare, Calendar, Search, PlusCircle } from "lucide-react"
-import Link from "next/link"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  FileText,
+  MessageSquare,
+  Calendar,
+  Search,
+  PlusCircle,
+} from "lucide-react";
+import Link from "next/link";
 
 const documents = [
   {
     id: "1",
     title: "Política de Privacidade v2.0",
-    description: "Documento atualizado com as novas diretrizes de proteção de dados",
+    description:
+      "Documento atualizado com as novas diretrizes de proteção de dados",
     uploadDate: "2024-01-15",
     contributions: 23,
     status: "active",
@@ -26,7 +39,7 @@ const documents = [
   },
   {
     id: "3",
-    title: "Manual do Usuário v3.1",
+    title: "Manual do Utilizador v3.1",
     description: "Guia completo para utilização da plataforma",
     uploadDate: "2024-01-10",
     contributions: 31,
@@ -60,15 +73,19 @@ const documents = [
     status: "active",
     category: "Suporte",
   },
-]
+];
 
 export default function ContributePage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Adicionar Nova Contribuição</h2>
-          <p className="text-muted-foreground">Selecione um documento para começar a contribuir</p>
+          <h2 className="text-3xl font-bold tracking-tight">
+            Adicionar Nova Contribuição
+          </h2>
+          <p className="text-muted-foreground">
+            Selecione um documento para começar a contribuir
+          </p>
         </div>
       </div>
 
@@ -95,12 +112,24 @@ export default function ContributePage() {
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <CardTitle className="text-lg">{doc.title}</CardTitle>
-                  <CardDescription className="mt-2">{doc.description}</CardDescription>
+                  <CardDescription className="mt-2">
+                    {doc.description}
+                  </CardDescription>
                 </div>
                 <Badge
-                  variant={doc.status === "active" ? "default" : doc.status === "review" ? "secondary" : "outline"}
+                  variant={
+                    doc.status === "active"
+                      ? "default"
+                      : doc.status === "review"
+                      ? "secondary"
+                      : "outline"
+                  }
                 >
-                  {doc.status === "active" ? "Ativo" : doc.status === "review" ? "Revisão" : "Rascunho"}
+                  {doc.status === "active"
+                    ? "Ativo"
+                    : doc.status === "review"
+                    ? "Revisão"
+                    : "Rascunho"}
                 </Badge>
               </div>
             </CardHeader>
@@ -139,5 +168,5 @@ export default function ContributePage() {
         ))}
       </div>
     </div>
-  )
+  );
 }

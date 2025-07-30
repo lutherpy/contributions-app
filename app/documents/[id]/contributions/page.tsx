@@ -1,13 +1,19 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Separator } from "@/components/ui/separator"
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 import {
   ArrowLeft,
   Search,
@@ -21,15 +27,15 @@ import {
   Flag,
   SortAsc,
   SortDesc,
-} from "lucide-react"
-import Link from "next/link"
+} from "lucide-react";
+import Link from "next/link";
 
 // Dados simulados
 const document = {
   id: "1",
   title: "Política de Privacidade v2.0",
   totalContributions: 23,
-}
+};
 
 const contributions = [
   {
@@ -54,14 +60,15 @@ const contributions = [
   {
     id: "2",
     title: "Erro de digitação na seção 5",
-    content: "Encontrei um erro de digitação na seção 5.1: 'direitos do usuários' deveria ser 'direitos dos usuários'.",
+    content:
+      "Encontrei um erro de digitação na seção 5.1: 'direitos do usuários' deveria ser 'direitos dos usuários'.",
     user: {
       name: "João Santos",
       avatar: "/placeholder.svg?height=40&width=40",
       role: "Revisor",
     },
     timestamp: "2024-01-15T12:15:00Z",
-    section: "5. Direitos do Usuário",
+    section: "5. Direitos do Utilizador",
     type: "correction",
     priority: "low",
     likes: 5,
@@ -92,14 +99,14 @@ const contributions = [
     id: "4",
     title: "Como exercer direitos na prática?",
     content:
-      "A seção sobre direitos do usuário está clara teoricamente, mas falta informação sobre como exercer esses direitos na prática. Poderia incluir um passo-a-passo?",
+      "A seção sobre direitos do utilizador está clara teoricamente, mas falta informação sobre como exercer esses direitos na prática. Poderia incluir um passo-a-passo?",
     user: {
       name: "Carlos Oliveira",
       avatar: "/placeholder.svg?height=40&width=40",
-      role: "Usuário",
+      role: "Utilizador",
     },
     timestamp: "2024-01-14T10:20:00Z",
-    section: "5. Direitos do Usuário",
+    section: "5. Direitos do Utilizador",
     type: "question",
     priority: "medium",
     likes: 6,
@@ -126,76 +133,100 @@ const contributions = [
     replies: 4,
     status: "open",
   },
-]
+];
 
 const typeConfig = {
-  suggestion: { label: "Sugestão", icon: Lightbulb, color: "bg-blue-100 text-blue-800" },
-  correction: { label: "Correção", icon: AlertCircle, color: "bg-red-100 text-red-800" },
-  question: { label: "Pergunta", icon: MessageSquare, color: "bg-yellow-100 text-yellow-800" },
-  concern: { label: "Preocupação", icon: Flag, color: "bg-orange-100 text-orange-800" },
-}
+  suggestion: {
+    label: "Sugestão",
+    icon: Lightbulb,
+    color: "bg-blue-100 text-blue-800",
+  },
+  correction: {
+    label: "Correção",
+    icon: AlertCircle,
+    color: "bg-red-100 text-red-800",
+  },
+  question: {
+    label: "Pergunta",
+    icon: MessageSquare,
+    color: "bg-yellow-100 text-yellow-800",
+  },
+  concern: {
+    label: "Preocupação",
+    icon: Flag,
+    color: "bg-orange-100 text-orange-800",
+  },
+};
 
 const statusConfig = {
   open: { label: "Aberto", color: "bg-green-100 text-green-800" },
   "in-review": { label: "Em Análise", color: "bg-blue-100 text-blue-800" },
   resolved: { label: "Resolvido", color: "bg-gray-100 text-gray-800" },
-}
+};
 
 const priorityConfig = {
   low: { label: "Baixa", color: "bg-gray-100 text-gray-800" },
   medium: { label: "Média", color: "bg-yellow-100 text-yellow-800" },
   high: { label: "Alta", color: "bg-orange-100 text-orange-800" },
   critical: { label: "Crítica", color: "bg-red-100 text-red-800" },
-}
+};
 
-export default function ContributionsPage({ params }: { params: { id: string } }) {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [filterType, setFilterType] = useState("all")
-  const [filterStatus, setFilterStatus] = useState("all")
-  const [sortBy, setSortBy] = useState("newest")
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc")
+export default function ContributionsPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterType, setFilterType] = useState("all");
+  const [filterStatus, setFilterStatus] = useState("all");
+  const [sortBy, setSortBy] = useState("newest");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
   const filteredContributions = contributions
     .filter((contrib) => {
       const matchesSearch =
         contrib.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         contrib.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contrib.user.name.toLowerCase().includes(searchTerm.toLowerCase())
-      const matchesType = filterType === "all" || contrib.type === filterType
-      const matchesStatus = filterStatus === "all" || contrib.status === filterStatus
-      return matchesSearch && matchesType && matchesStatus
+        contrib.user.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesType = filterType === "all" || contrib.type === filterType;
+      const matchesStatus =
+        filterStatus === "all" || contrib.status === filterStatus;
+      return matchesSearch && matchesType && matchesStatus;
     })
     .sort((a, b) => {
-      let comparison = 0
+      let comparison = 0;
       switch (sortBy) {
         case "newest":
-          comparison = new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-          break
+          comparison =
+            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+          break;
         case "likes":
-          comparison = b.likes - a.likes
-          break
+          comparison = b.likes - a.likes;
+          break;
         case "priority":
-          const priorityOrder = { critical: 4, high: 3, medium: 2, low: 1 }
+          const priorityOrder = { critical: 4, high: 3, medium: 2, low: 1 };
           comparison =
             priorityOrder[b.priority as keyof typeof priorityOrder] -
-            priorityOrder[a.priority as keyof typeof priorityOrder]
-          break
+            priorityOrder[a.priority as keyof typeof priorityOrder];
+          break;
         default:
-          comparison = 0
+          comparison = 0;
       }
-      return sortOrder === "desc" ? comparison : -comparison
-    })
+      return sortOrder === "desc" ? comparison : -comparison;
+    });
 
   const formatDate = (timestamp: string) => {
-    const date = new Date(timestamp)
-    const now = new Date()
-    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60))
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffInHours = Math.floor(
+      (now.getTime() - date.getTime()) / (1000 * 60 * 60)
+    );
 
-    if (diffInHours < 1) return "Agora mesmo"
-    if (diffInHours < 24) return `${diffInHours}h atrás`
-    if (diffInHours < 48) return "1 dia atrás"
-    return `${Math.floor(diffInHours / 24)} dias atrás`
-  }
+    if (diffInHours < 1) return "Agora mesmo";
+    if (diffInHours < 24) return `${diffInHours}h atrás`;
+    if (diffInHours < 48) return "1 dia atrás";
+    return `${Math.floor(diffInHours / 24)} dias atrás`;
+  };
 
   return (
     <div className="space-y-6">
@@ -209,7 +240,9 @@ export default function ContributionsPage({ params }: { params: { id: string } }
             </Link>
           </Button>
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">Todas as Contribuições</h2>
+            <h2 className="text-3xl font-bold tracking-tight">
+              Todas as Contribuições
+            </h2>
             <p className="text-muted-foreground">
               {document.title} • {document.totalContributions} contribuições
             </p>
@@ -278,8 +311,18 @@ export default function ContributionsPage({ params }: { params: { id: string } }
                 </SelectContent>
               </Select>
 
-              <Button variant="outline" size="icon" onClick={() => setSortOrder(sortOrder === "desc" ? "asc" : "desc")}>
-                {sortOrder === "desc" ? <SortDesc className="h-4 w-4" /> : <SortAsc className="h-4 w-4" />}
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() =>
+                  setSortOrder(sortOrder === "desc" ? "asc" : "desc")
+                }
+              >
+                {sortOrder === "desc" ? (
+                  <SortDesc className="h-4 w-4" />
+                ) : (
+                  <SortAsc className="h-4 w-4" />
+                )}
               </Button>
             </div>
           </div>
@@ -289,7 +332,8 @@ export default function ContributionsPage({ params }: { params: { id: string } }
       {/* Results Summary */}
       <div className="flex items-center justify-between text-sm text-muted-foreground">
         <span>
-          Mostrando {filteredContributions.length} de {contributions.length} contribuições
+          Mostrando {filteredContributions.length} de {contributions.length}{" "}
+          contribuições
         </span>
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1">
@@ -298,11 +342,13 @@ export default function ContributionsPage({ params }: { params: { id: string } }
           </span>
           <span className="flex items-center gap-1">
             <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-            {contributions.filter((c) => c.status === "in-review").length} Em Análise
+            {contributions.filter((c) => c.status === "in-review").length} Em
+            Análise
           </span>
           <span className="flex items-center gap-1">
             <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
-            {contributions.filter((c) => c.status === "resolved").length} Resolvidas
+            {contributions.filter((c) => c.status === "resolved").length}{" "}
+            Resolvidas
           </span>
         </div>
       </div>
@@ -310,25 +356,39 @@ export default function ContributionsPage({ params }: { params: { id: string } }
       {/* Contributions List */}
       <div className="space-y-4">
         {filteredContributions.map((contribution, index) => {
-          const typeInfo = typeConfig[contribution.type as keyof typeof typeConfig]
-          const statusInfo = statusConfig[contribution.status as keyof typeof statusConfig]
-          const priorityInfo = priorityConfig[contribution.priority as keyof typeof priorityConfig]
+          const typeInfo =
+            typeConfig[contribution.type as keyof typeof typeConfig];
+          const statusInfo =
+            statusConfig[contribution.status as keyof typeof statusConfig];
+          const priorityInfo =
+            priorityConfig[
+              contribution.priority as keyof typeof priorityConfig
+            ];
 
           return (
-            <Card key={contribution.id} className="hover:shadow-md transition-shadow">
+            <Card
+              key={contribution.id}
+              className="hover:shadow-md transition-shadow"
+            >
               <CardContent className="pt-6">
                 <div className="space-y-4">
                   {/* Header */}
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <h3 className="font-semibold text-lg mb-2">{contribution.title}</h3>
+                      <h3 className="font-semibold text-lg mb-2">
+                        {contribution.title}
+                      </h3>
                       <div className="flex flex-wrap items-center gap-2 mb-3">
                         <Badge className={typeInfo.color}>
                           <typeInfo.icon className="h-3 w-3 mr-1" />
                           {typeInfo.label}
                         </Badge>
-                        <Badge className={statusInfo.color}>{statusInfo.label}</Badge>
-                        <Badge className={priorityInfo.color}>{priorityInfo.label}</Badge>
+                        <Badge className={statusInfo.color}>
+                          {statusInfo.label}
+                        </Badge>
+                        <Badge className={priorityInfo.color}>
+                          {priorityInfo.label}
+                        </Badge>
                         <Badge variant="outline">{contribution.section}</Badge>
                       </div>
                     </div>
@@ -345,7 +405,9 @@ export default function ContributionsPage({ params }: { params: { id: string } }
                   </div>
 
                   {/* Content */}
-                  <p className="text-muted-foreground leading-relaxed">{contribution.content}</p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {contribution.content}
+                  </p>
 
                   <Separator />
 
@@ -354,7 +416,9 @@ export default function ContributionsPage({ params }: { params: { id: string } }
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2">
                         <Avatar className="h-8 w-8">
-                          <AvatarImage src={contribution.user.avatar || "/placeholder.svg"} />
+                          <AvatarImage
+                            src={contribution.user.avatar || "/placeholder.svg"}
+                          />
                           <AvatarFallback>
                             {contribution.user.name
                               .split(" ")
@@ -363,8 +427,12 @@ export default function ContributionsPage({ params }: { params: { id: string } }
                           </AvatarFallback>
                         </Avatar>
                         <div>
-                          <p className="font-medium text-sm">{contribution.user.name}</p>
-                          <p className="text-xs text-muted-foreground">{contribution.user.role}</p>
+                          <p className="font-medium text-sm">
+                            {contribution.user.name}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {contribution.user.role}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -392,7 +460,7 @@ export default function ContributionsPage({ params }: { params: { id: string } }
                 </div>
               </CardContent>
             </Card>
-          )
+          );
         })}
       </div>
 
@@ -402,7 +470,9 @@ export default function ContributionsPage({ params }: { params: { id: string } }
           <CardContent className="pt-6">
             <div className="text-center py-8">
               <MessageSquare className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-medium mb-2">Nenhuma contribuição encontrada</h3>
+              <h3 className="text-lg font-medium mb-2">
+                Nenhuma contribuição encontrada
+              </h3>
               <p className="text-muted-foreground mb-4">
                 {searchTerm || filterType !== "all" || filterStatus !== "all"
                   ? "Tente ajustar os filtros de busca"
@@ -419,5 +489,5 @@ export default function ContributionsPage({ params }: { params: { id: string } }
         </Card>
       )}
     </div>
-  )
+  );
 }

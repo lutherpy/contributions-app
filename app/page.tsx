@@ -1,8 +1,23 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { FileText, MessageSquare, Users, TrendingUp, Brain, AlertCircle, CheckCircle, Target } from "lucide-react"
-import Link from "next/link"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  FileText,
+  MessageSquare,
+  Users,
+  TrendingUp,
+  Brain,
+  AlertCircle,
+  CheckCircle,
+  Target,
+} from "lucide-react";
+import Link from "next/link";
 
 // Dados simulados
 const stats = {
@@ -10,7 +25,7 @@ const stats = {
   totalContributions: 156,
   activeUsers: 34,
   avgContributionsPerDoc: 13,
-}
+};
 
 const recentDocuments = [
   {
@@ -31,13 +46,13 @@ const recentDocuments = [
   },
   {
     id: "3",
-    title: "Manual do Usuário v3.1",
+    title: "Manual do Utilizador v3.1",
     contributions: 31,
     status: "active",
     lastActivity: "3 horas atrás",
     aiSuggestions: 8,
   },
-]
+];
 
 const aiInsights = [
   {
@@ -54,7 +69,7 @@ const aiInsights = [
   {
     type: "opportunity",
     title: "Aumento de 40% em Contribuições de Qualidade",
-    document: "Manual do Usuário v3.1",
+    document: "Manual do Utilizador v3.1",
     confidence: 89,
     impact: "Positivo",
     details: "Especialistas estão mais engajados, melhorando qualidade geral",
@@ -84,21 +99,25 @@ const aiInsights = [
     affectedUsers: 34,
     estimatedResolution: "Expandir para outros documentos",
   },
-]
+];
 
 export default function Dashboard() {
   return (
     <div className="space-y-6">
       <div>
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-        <p className="text-muted-foreground">Visão geral das contribuições e análises de documentos</p>
+        <p className="text-muted-foreground">
+          Visão geral das contribuições e análises de documentos
+        </p>
       </div>
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total de Documentos</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Total de Documentos
+            </CardTitle>
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -120,7 +139,9 @@ export default function Dashboard() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Usuários Ativos</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Utilizadores Ativos
+            </CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -135,7 +156,9 @@ export default function Dashboard() {
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.avgContributionsPerDoc}</div>
+            <div className="text-2xl font-bold">
+              {stats.avgContributionsPerDoc}
+            </div>
             <p className="text-xs text-muted-foreground">contribuições</p>
           </CardContent>
         </Card>
@@ -146,11 +169,16 @@ export default function Dashboard() {
         <Card>
           <CardHeader>
             <CardTitle>Documentos Recentes</CardTitle>
-            <CardDescription>Documentos com atividade recente de contribuições</CardDescription>
+            <CardDescription>
+              Documentos com atividade recente de contribuições
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {recentDocuments.map((doc) => (
-              <div key={doc.id} className="flex items-center justify-between p-3 border rounded-lg">
+              <div
+                key={doc.id}
+                className="flex items-center justify-between p-3 border rounded-lg"
+              >
                 <div className="space-y-1">
                   <p className="font-medium">{doc.title}</p>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -161,7 +189,9 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge variant={doc.status === "active" ? "default" : "secondary"}>
+                  <Badge
+                    variant={doc.status === "active" ? "default" : "secondary"}
+                  >
                     {doc.status === "active" ? "Ativo" : "Revisão"}
                   </Badge>
                   <Button asChild size="sm" variant="outline">
@@ -180,16 +210,29 @@ export default function Dashboard() {
               <Brain className="h-5 w-5" />
               Insights da IA
             </CardTitle>
-            <CardDescription>Análises automáticas e sugestões baseadas nas contribuições</CardDescription>
+            <CardDescription>
+              Análises automáticas e sugestões baseadas nas contribuições
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {aiInsights.map((insight, index) => (
-              <div key={index} className="flex items-start gap-3 p-4 border rounded-lg">
+              <div
+                key={index}
+                className="flex items-start gap-3 p-4 border rounded-lg"
+              >
                 <div className="mt-1">
-                  {insight.type === "critical" && <AlertCircle className="h-5 w-5 text-red-500" />}
-                  {insight.type === "opportunity" && <TrendingUp className="h-5 w-5 text-green-500" />}
-                  {insight.type === "prediction" && <Brain className="h-5 w-5 text-blue-500" />}
-                  {insight.type === "success" && <CheckCircle className="h-5 w-5 text-emerald-500" />}
+                  {insight.type === "critical" && (
+                    <AlertCircle className="h-5 w-5 text-red-500" />
+                  )}
+                  {insight.type === "opportunity" && (
+                    <TrendingUp className="h-5 w-5 text-green-500" />
+                  )}
+                  {insight.type === "prediction" && (
+                    <Brain className="h-5 w-5 text-blue-500" />
+                  )}
+                  {insight.type === "success" && (
+                    <CheckCircle className="h-5 w-5 text-emerald-500" />
+                  )}
                 </div>
                 <div className="flex-1 space-y-2">
                   <div className="flex items-center justify-between">
@@ -198,8 +241,12 @@ export default function Dashboard() {
                       {insight.confidence}% confiança
                     </Badge>
                   </div>
-                  <p className="text-xs text-muted-foreground">{insight.document}</p>
-                  <p className="text-xs text-muted-foreground">{insight.details}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {insight.document}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {insight.details}
+                  </p>
 
                   <div className="flex items-center gap-3 text-xs">
                     <div className="flex items-center gap-1">
@@ -210,13 +257,21 @@ export default function Dashboard() {
                       <Target className="h-3 w-3" />
                       <span>Impacto {insight.impact}</span>
                     </div>
-                    {insight.trend === "increasing" && <TrendingUp className="h-3 w-3 text-green-500" />}
-                    {insight.trend === "improving" && <CheckCircle className="h-3 w-3 text-blue-500" />}
+                    {insight.trend === "increasing" && (
+                      <TrendingUp className="h-3 w-3 text-green-500" />
+                    )}
+                    {insight.trend === "improving" && (
+                      <CheckCircle className="h-3 w-3 text-blue-500" />
+                    )}
                   </div>
 
                   <div className="pt-2 border-t">
-                    <p className="text-xs font-medium text-gray-700">Ação Recomendada:</p>
-                    <p className="text-xs text-muted-foreground">{insight.estimatedResolution}</p>
+                    <p className="text-xs font-medium text-gray-700">
+                      Ação Recomendada:
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {insight.estimatedResolution}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -225,5 +280,5 @@ export default function Dashboard() {
         </Card>
       </div>
     </div>
-  )
+  );
 }
