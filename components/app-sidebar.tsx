@@ -1,11 +1,4 @@
-import {
-  FileText,
-  Home,
-  Upload,
-  Users,
-  BarChart3,
-  Settings,
-} from "lucide-react";
+import { FileText, Home, Upload, Users, BarChart3, Settings, Gavel, User } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -17,12 +10,12 @@ import {
   SidebarMenuItem,
   SidebarHeader,
   SidebarFooter,
-} from "@/components/ui/sidebar";
-import Link from "next/link";
+} from "@/components/ui/sidebar"
+import Link from "next/link"
 
 const menuItems = [
   {
-    title: "Dashboard",
+    title: "Dashboard Geral",
     url: "/",
     icon: Home,
   },
@@ -37,7 +30,7 @@ const menuItems = [
     icon: Upload,
   },
   {
-    title: "Utilizadors",
+    title: "Usuários",
     url: "/users",
     icon: Users,
   },
@@ -46,13 +39,27 @@ const menuItems = [
     url: "/reports",
     icon: BarChart3,
   },
-];
+]
+
+// Novos itens de menu para as visões de perfil
+const profileViews = [
+  {
+    title: "Visão do Regulador",
+    url: "/regulator",
+    icon: Gavel,
+  },
+  {
+    title: "Visão do Participante",
+    url: "/participant",
+    icon: User,
+  },
+]
 
 const documents = [
   { id: "1", title: "Política de Privacidade", contributions: 12 },
   { id: "2", title: "Termos de Uso", contributions: 8 },
-  { id: "3", title: "Manual do Utilizador", contributions: 15 },
-];
+  { id: "3", title: "Manual do Usuário", contributions: 15 },
+]
 
 export function AppSidebar() {
   return (
@@ -70,6 +77,24 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Visões de Perfil</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {profileViews.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link href={item.url}>
@@ -118,5 +143,5 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
-  );
+  )
 }

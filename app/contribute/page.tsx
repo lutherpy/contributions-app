@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { FileText, MessageSquare, Calendar, Search } from "lucide-react"
+import { FileText, MessageSquare, Calendar, Search, PlusCircle } from "lucide-react"
 import Link from "next/link"
 
 const documents = [
@@ -62,20 +62,14 @@ const documents = [
   },
 ]
 
-export default function DocumentsPage() {
+export default function ContributePage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Documentos</h2>
-          <p className="text-muted-foreground">Explore e contribua com os documentos disponíveis</p>
+          <h2 className="text-3xl font-bold tracking-tight">Adicionar Nova Contribuição</h2>
+          <p className="text-muted-foreground">Selecione um documento para começar a contribuir</p>
         </div>
-        <Button asChild>
-          <Link href="/admin">
-            <FileText className="mr-2 h-4 w-4" />
-            Novo Documento
-          </Link>
-        </Button>
       </div>
 
       {/* Search and Filters */}
@@ -130,7 +124,10 @@ export default function DocumentsPage() {
 
                 <div className="flex gap-2">
                   <Button asChild className="flex-1">
-                    <Link href={`/documents/${doc.id}`}>Ver Documento</Link>
+                    <Link href={`/documents/${doc.id}/contribute`}>
+                      <PlusCircle className="mr-2 h-4 w-4" />
+                      Contribuir
+                    </Link>
                   </Button>
                   <Button variant="outline" size="icon">
                     <FileText className="h-4 w-4" />

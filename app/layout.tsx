@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt" suppressHydrationWarning>
+    <html lang="pt" suppressContentEditableWarning>
       <body className={inter.className}>
         <SidebarProvider>
           <AppSidebar />
